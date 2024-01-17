@@ -5,7 +5,7 @@ import { Combobox, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { Fragment, useState } from "react";
 
-const SearchManuf = ({ manuf, setManuf }: SearchManufProps) => {
+const SearchManuf = ({ selected, setSelected }: SearchManufProps) => {
     const [query, setQuery] = useState("");
     const filteredManuf =
         query === ""
@@ -18,7 +18,7 @@ const SearchManuf = ({ manuf, setManuf }: SearchManufProps) => {
               );
     return (
         <div className="search-manufacturer">
-            <Combobox value={manuf} onChange={setManuf}>
+            <Combobox value={selected} onChange={setSelected}>
                 <div className="relative w-full">
                     <Combobox.Button className="absolute top-[14px]">
                         <Image
@@ -32,7 +32,6 @@ const SearchManuf = ({ manuf, setManuf }: SearchManufProps) => {
                     <Combobox.Input
                         className="search-manufacturer__input"
                         placeholder="Volkswagen"
-                        displayValue={(manuf: string) => manuf}
                         onChange={(e) => setQuery(e.target.value)}
                     />
 
@@ -43,45 +42,57 @@ const SearchManuf = ({ manuf, setManuf }: SearchManufProps) => {
                         leaveTo="opacity-0"
                         afterLeave={() => setQuery("")}
                     >
-                        <Combobox.Options>
-                            {filteredManuf.map((item) => (
+                        <Combobox.Options
+                            className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                            static
+                        >
+                            {filteredManuf.length === 0 && query !== "" ? (
                                 <Combobox.Option
-                                    key={item}
-                                    value={item}
-                                    className={({ active }) =>
-                                        `relative search-manufacturer__option ${
-                                            active
-                                                ? "bg-primary-blue text-white"
-                                                : "text-gray-900"
-                                        }`
-                                    }
+                                    value={query}
+                                    className="search-manufacturer__option"
                                 >
-                                    {({ selected, active }) => (
-                                        <>
-                                            <span
-                                                className={`block truncate ${
-                                                    selected
-                                                        ? "font-medium"
-                                                        : "font-normal"
-                                                }`}
-                                            >
-                                                {item}
-                                            </span>
-                                            {selected ? (
+                                    Create "{query}"
+                                </Combobox.Option>
+                            ) : (
+                                filteredManuf.map((item) => (
+                                    <Combobox.Option
+                                        key={item}
+                                        value={item}
+                                        className={({ active }) =>
+                                            `relative search-manufacturer__option ${
+                                                active
+                                                    ? "bg-primary-blue text-white"
+                                                    : "text-gray-900"
+                                            }`
+                                        }
+                                    >
+                                        {({ selected, active }) => (
+                                            <>
                                                 <span
-                                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                                        active
-                                                            ? "text-white"
-                                                            : "text-teal-600"
+                                                    className={`block truncate ${
+                                                        selected
+                                                            ? "font-medium"
+                                                            : "font-normal"
                                                     }`}
                                                 >
-                                                    ✔
+                                                    {item}
                                                 </span>
-                                            ) : null}{" "}
-                                        </>
-                                    )}
-                                </Combobox.Option>
-                            ))}
+                                                {selected ? (
+                                                    <span
+                                                        className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                                            active
+                                                                ? "text-white"
+                                                                : "text-teal-600"
+                                                        }`}
+                                                    >
+                                                        ✔
+                                                    </span>
+                                                ) : null}
+                                            </>
+                                        )}
+                                    </Combobox.Option>
+                                ))
+                            )}
                         </Combobox.Options>
                     </Transition>
                 </div>
