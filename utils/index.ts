@@ -1,11 +1,13 @@
 import { CarProps, FilterProps } from "@/types";
 
 export async function fetchCars(filters: FilterProps) {
+    const APIKey = process.env.NEXT_PUBLIC_RAPID_API_KEY || "";
+
     const headers = {
-        "X-RapidAPI-Key": "5e371ae64dmshaef9ff2baf58dd9p1f2c93jsn9d3da2407870",
+        "X-RapidAPI-Key": APIKey,
         "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
     };
-
+    console.log(headers);
     const { manuf, year, fuel, limit, model } = filters;
 
     const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manuf}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`;
@@ -37,7 +39,9 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
     const { make, year, model } = car;
 
-    url.searchParams.append("customer", "hrjavascript-mastery");
+    const APIKey = process.env.NEXT_PUBLIC_IMAGIN_STUDIO_API_KEY || "";
+
+    url.searchParams.append("customer", APIKey);
     url.searchParams.append("make", make);
     url.searchParams.append("modelFamily", model.split(" ")[0]);
     url.searchParams.append("zoomType", "fullscreen");
