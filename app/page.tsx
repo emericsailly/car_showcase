@@ -3,7 +3,6 @@
 import { CarCard, CustomFilter, Hero, Searchbar, ShowMore } from "@/components";
 import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -78,13 +77,7 @@ export default function Home() {
                         </div>
                         {loading && (
                             <div className="mt-16 w-full flex-center">
-                                <Image
-                                    src="/loader.svg"
-                                    alt="loader"
-                                    width={50}
-                                    height={50}
-                                    className="object-contain"
-                                />
+                                Loading...
                             </div>
                         )}
                         <ShowMore
