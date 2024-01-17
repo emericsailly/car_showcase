@@ -1,7 +1,7 @@
 "use client";
 
 import { CarCard, CustomFilter, Hero, Searchbar, ShowMore } from "@/components";
-import { fuels, yearsOfProduction } from "@/constants";
+import { colors, fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 import { useEffect, useState } from "react";
 
@@ -16,6 +16,7 @@ export default function Home() {
     //filter states
     const [fuel, setFuel] = useState("");
     const [year, setYear] = useState(2022);
+    const [color, setColor] = useState("");
 
     const [limit, setLimit] = useState(10);
 
@@ -65,6 +66,7 @@ export default function Home() {
                             options={yearsOfProduction}
                             setFilter={setYear}
                         />
+                        <CustomFilter options={colors} setFilter={setColor} />
                     </div>
                 </div>
 
@@ -72,7 +74,7 @@ export default function Home() {
                     <section>
                         <div className="home__cars-wrapper">
                             {allCars?.map((car, index) => (
-                                <CarCard key={index} car={car} />
+                                <CarCard key={index} car={car} color={color} />
                             ))}
                         </div>
                         {loading && (

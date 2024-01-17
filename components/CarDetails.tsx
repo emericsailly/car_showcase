@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { generateCarImageUrl } from "@/utils";
 
-const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
+const CarDetails = ({ isOpen, closeModal, car, color }: CarDetailsProps) => {
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
@@ -50,7 +50,11 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                                     <div className="flex-1 flex flex-col gap-3">
                                         <div className="relative wfull h-40 bg-pattern bg-cover bg-center rounded-lg">
                                             <Image
-                                                src={generateCarImageUrl(car)}
+                                                src={generateCarImageUrl(
+                                                    car,
+                                                    "",
+                                                    color
+                                                )}
                                                 alt="car model"
                                                 fill
                                                 priority
@@ -62,7 +66,8 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                                                 <Image
                                                     src={generateCarImageUrl(
                                                         car,
-                                                        "29"
+                                                        "29",
+                                                        color
                                                     )}
                                                     alt="car model"
                                                     fill
@@ -74,7 +79,8 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                                                 <Image
                                                     src={generateCarImageUrl(
                                                         car,
-                                                        "33"
+                                                        "33",
+                                                        color
                                                     )}
                                                     alt="car model"
                                                     fill
@@ -86,7 +92,8 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                                                 <Image
                                                     src={generateCarImageUrl(
                                                         car,
-                                                        "13"
+                                                        "13",
+                                                        color
                                                     )}
                                                     alt="car model"
                                                     fill

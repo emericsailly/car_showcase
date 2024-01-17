@@ -99,3 +99,12 @@ export const footerLinks = [
         ],
     },
 ];
+//
+export const colors = [
+    { title: "Grey", value: "pspc0096" },
+    { title: "Yellow", value: "pspc0220" },
+    { title: "Red", value: "pspc0034" },
+    { title: "White", value: "imagin-white" },
+    { title: "Light Blue", value: "pspc0014" },
+    { title: "Dark", value: "pspc0064" },
+];

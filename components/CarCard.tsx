@@ -8,9 +8,10 @@ import { CarDetails, CustomButton } from ".";
 
 interface CarCardProps {
     car: CarProps;
+    color: string;
 }
 
-const CarCard = ({ car }: CarCardProps) => {
+const CarCard = ({ car, color }: CarCardProps) => {
     const { city_mpg, year, make, model, transmission, drive } = car;
 
     const carRent = calculateCarRent(city_mpg, year);
@@ -31,7 +32,7 @@ const CarCard = ({ car }: CarCardProps) => {
             </p>
             <div className="relative w-full h-40 my-3 object-contain">
                 <Image
-                    src={generateCarImageUrl(car)}
+                    src={generateCarImageUrl(car, "", color)}
                     alt="car model"
                     fill
                     priority
@@ -84,6 +85,7 @@ const CarCard = ({ car }: CarCardProps) => {
                 isOpen={isOpen}
                 closeModal={() => setIsOpen(false)}
                 car={car}
+                color={color}
             />
         </div>
     );

@@ -34,7 +34,11 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
     return rentalRatePerDay.toFixed(0);
 };
 
-export const generateCarImageUrl = (car: CarProps, angle?: string) => {
+export const generateCarImageUrl = (
+    car: CarProps,
+    angle?: string,
+    color?: string
+) => {
     const url = new URL("https://cdn.imagin.studio/getimage");
 
     const { make, year, model } = car;
@@ -47,6 +51,7 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
     url.searchParams.append("zoomType", "fullscreen");
     url.searchParams.append("modelYear", `${year}`);
     url.searchParams.append("angle", `${angle}`);
+    url.searchParams.append("paintID", `${color}`);
 
     return `${url}`;
 };

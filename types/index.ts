@@ -39,6 +39,7 @@ export interface CarDetailsProps {
     isOpen: boolean;
     closeModal: () => void;
     car: CarProps;
+    color: string;
 }
 
 export interface FilterProps {
